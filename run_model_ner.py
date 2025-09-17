@@ -24,7 +24,7 @@ parser.add_argument(
 parser.add_argument(
     "--pretrained_model",
     type=str,
-    default="projects/PetBERT_annonymisation/data/models/transformer/checkpoint-2752",
+    default="SAVSNET/PetHarbor",
     help="Name of the pretrained transformer model, used for fine-tuning",
 )
 parser.add_argument(
@@ -42,7 +42,7 @@ parser.add_argument(
 parser.add_argument(
     "--dataset",
     type=str,
-    default="projects/PetBERT_annonymisation/data/arrow",
+    default="SAVSNET/PetEVAL",
     help="Path to the dataset. For training a Huggingface dataset is required. For inference, either csv or the test set of Huggingface dataset",
 )
 parser.add_argument(
@@ -54,7 +54,7 @@ parser.add_argument(
 parser.add_argument(
     "--entity_column",
     type=str,
-    default="entities",
+    default="annonymisation",
     help="Name of the column containing NER tags in the dataset",
 )
 parser.add_argument(

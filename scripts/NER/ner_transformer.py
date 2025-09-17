@@ -210,6 +210,7 @@ def main(args):
             label_to_id=label_to_id,
             max_length=args.context_length,
             text_column=args.text_column,
+            label_column=args.entity_column,
             mode=args.mode,
         ),
         batched=True,

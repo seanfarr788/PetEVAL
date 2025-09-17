@@ -47,16 +47,18 @@ def evaluate(tokenized_dataset, predictions, config, output_dir):
     pred_ids = np.argmax(predictions.predictions, axis=-1)
     true_ids = tokenized_dataset["test"]["labels"]
 
-    # Convert token IDs to labels
-    pred_labels = [
-        [config.id2label[label] for label in example if label != -100]
-        for example in pred_ids
-    ]
+    pred_labels = []
+    true_labels = []
 
-    true_labels = [
-        [config.id2label[label] for label in example if label != -100]
-        for example in true_ids
-    ]
+    for pred_seq, true_seq in zip(pred_ids, true_ids):
+        seq_pred_labels = []
+        seq_true_labels = []
+        for p, t in zip(pred_seq, true_seq):
+            if t != -100:  # only evaluate real tokens
+                seq_pred_labels.append(config.id2label[p])
+                seq_true_labels.append(config.id2label[t])
+        pred_labels.append(seq_pred_labels)
+        true_labels.append(seq_true_labels)
 
     report = classification_report(true_labels, pred_labels, output_dict=True)
     report = pd.DataFrame(report).transpose()

@@ -1,6 +1,8 @@
+import ast
 from tqdm import tqdm
 import numpy as np
-
+import re
+import ast
 
 def create_label_mapping(dataset):
     """
@@ -34,7 +36,7 @@ def create_label_mapping(dataset):
 
 
 def tokenize_and_align_labels(
-    examples, tokenizer, label_to_id, max_length, text_column="sentence", mode="train"
+    examples, tokenizer, label_to_id, max_length, text_column="sentence", label_column='entities', mode="train"
 ):
     """
     Tokenizes the input sentences and aligns the labels using BIO format.
@@ -58,7 +60,10 @@ def tokenize_and_align_labels(
         return tokenized_inputs
     
     labels = []
-    for i, (sentence, entities) in enumerate(zip(examples[text_column], examples["entities"])):
+    for i, (sentence, entities) in enumerate(zip(examples[text_column], examples[label_column])):
+        if type(entities) == str:
+            entities_fixed = re.sub(r"}\s+{", "}, {", entities) # Fix spacing issues
+            entities = ast.literal_eval(entities_fixed)
         word_labels = ["O"] * len(sentence)  # Initialize all as "O"
         
         for entity in entities:

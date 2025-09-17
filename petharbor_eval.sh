@@ -1,0 +1,1 @@
+python run_model_ner.py --backend "transformers" --mode "eval" --pretrained_model="SAVSNET/PetHarbor" --dataset="SAVSNET/PetEVAL" --text_column sentence --entity_column annonymisation --output_dir="report.csv"

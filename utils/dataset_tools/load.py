@@ -27,9 +27,6 @@ def load_dataset_file(file_path: str, testing: Union[bool, int] = False) -> Data
     """
     file_path = Path(file_path)
 
-    if not file_path.exists():
-        raise ValueError(f"File not found: {file_path}")
-
     dataset = (
         _try_load_from_disk(file_path)
         or _try_load_from_file(file_path)
