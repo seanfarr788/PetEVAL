@@ -48,6 +48,7 @@ parser.add_argument(
     "--text_column",
     default="text",
     help="text column")
+
 parser.add_argument(
     "--label_column",
     default="label",
@@ -79,12 +80,6 @@ parser.add_argument(
     "--output_dir",
     default="datasets/catergory/alopecia/arrow/",
     help="output directory",
-)
-parser.add_argument(
-    "--embedding_level",
-    choices=["word", "sentence", "setfit"],
-    help="wether to use word embeddings or sentence embeddings",
-    default="word",
 )
 args = parser.parse_args()
 

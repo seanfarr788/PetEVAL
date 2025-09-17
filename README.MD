@@ -16,8 +16,9 @@ Ensuring the privacy and security of EHRs is crucial for safeguarding the person
 
 #### Train
 ```
-python3 run_datasets_arrow_gen.py --train_file train.csv --eval_file eval.csv --test_file test.csv --text_column text --output_dir arrow
-python run_model_ner.py --backend "transformers" --mode "train" --pretrained_model=SAVSNET/PetBERT --dataset=PetBERT_annonymisation/datasets --output_dir="models/1.annonymisation/PetBERT"
+python3 run_datasets_arrow_gen.py --train_file train.csv --eval_file eval.csv --test_file test.csv --text_column sentence --label annonymisation --output_dir datasets/1.annonymisation/arrow
+
+python run_model_ner.py --backend "transformers" --mode "train" --pretrained_model=SAVSNET/PetBERT --dataset=datasets/1.annonymisation/arrow --output_dir="models/1.annonymisation/PetBERT"
 ```
 
 #### Eval
@@ -30,7 +31,10 @@ Given the critical role of monitoring national disease outbreaks in public healt
 
 #### Train
 ```
-python run_model_classification.py --problem_type multi_label_classification --mode train --pretrained_model "SAVSNET/PetBERT" --dataset "datasets/1.annonymisation/arrow" --output_dir "models/1.annonymisation/PetBERT/"
+python3 run_datasets_arrow_gen.py --train_file train.csv --eval_file eval.csv --test_file test.csv --text_column sentence --label icd_label --output_dir datasets/2.syndromic/arrow
+
+
+python run_model_classification.py --problem_type multi_label_classification --mode train --pretrained_model "SAVSNET/PetBERT" --dataset "datasets/2.syndromic/arrow" --output_dir "models/1.annonymisation/PetBERT/"
 ```
 #### Eval
 ```
@@ -42,7 +46,9 @@ Identifying specific diseases is critical for downstream epidemiological studies
 
 #### Train
 ```
-python run_model_ner.py --backend "transformers" --mode "train" --pretrained_model=SAVSNET/PetBERT --dataset=PetBERT_disease/datasets --output_dir="models/1.annonymisation/PetBERT"
+python3 run_datasets_arrow_gen.py --train_file train.csv --eval_file eval.csv --test_file test.csv --text_column sentence --label disease --output_dir datasets/3.disease/arrow
+
+python run_model_ner.py --backend "transformers" --mode "train" --pretrained_model=SAVSNET/PetBERT --dataset=atasets/3.disease/arrow --output_dir="models/1.annonymisation/PetBERT"
 ```
 
 #### Eval

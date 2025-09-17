@@ -13,7 +13,6 @@ parser.add_argument(
     "--backend",
     help="Backend for the model options",
     default="transformers",
-    choices=["transformers", "flair", "spacy"],
 )
 parser.add_argument(
     "--mode",
