@@ -109,11 +109,8 @@ and hyperparameter configuration.
 Transformers Library: https://huggingface.co/transformers/
 
 Arguments:
-    --pretrained_flair_model (str): Path to a pretrained FLAIR model. If not provided, 
-        the model will be trained from scratch.
     --pretrained_model (str): Name of the pretrained transformer model to use for 
         fine-tuning. Defaults to "SAVSNET/PetBERT".
-    --do_eval (flag): If set, the script evaluates the trained model on the test set.
     --dataset (str): Path to the dataset for training or inference. During training, 
         the dataset must be a Huggingface dataset. For inference, it can either be a 
         CSV file or the test set of the Huggingface dataset.
